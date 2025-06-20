@@ -39,6 +39,7 @@ function getRandomColor(){
 
 
 let buttonContainer = document.createElement("div")
+buttonContainer.setAttribute("class", "button-container")
 let removeButton = document.createElement("button")
 removeButton.textContent= "Delete"
 buttonContainer.appendChild(removeButton)
@@ -63,6 +64,32 @@ function newGrid(){
 
 let newGridButton= document.createElement("button")
 newGridButton.textContent= "New"
+
 buttonContainer.appendChild(newGridButton)
 
 newGridButton.addEventListener("click", newGrid )
+
+
+let darkModeButton = document.createElement("button");
+darkModeButton.textContent = "Toggle Dark Mode";
+buttonContainer.appendChild(darkModeButton);
+
+darkModeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+});
+
+let downloadButton = document.createElement("button");
+downloadButton.textContent = "Download Image";
+buttonContainer.appendChild(downloadButton);
+
+downloadButton.addEventListener("click", () => {
+    const container = document.querySelector(".container");
+
+    html2canvas(container).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "etch-a-sketch.png";
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+});
+
